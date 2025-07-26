@@ -2,6 +2,22 @@ import { stringify, v5, validate } from 'uuid'
 import { WebSocket, createWebSocketStream, WebSocketServer } from 'ws'
 import { createConnection } from 'net'
 import { RemoteInfo, createSocket } from 'dgram'
+import { Logging } from '@google-cloud/logging'
+
+const projectId = 'cloud-run-proxy-449105'
+const logging = new Logging({ projectId })
+const logger = logging.log('my-log')
+
+async function log (msg: string) {
+  const metadata = {
+    resource: { type: 'global' },
+    // See: https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#logseverity
+    severity: 'INFO'
+  }
+  const entry = logger.entry(metadata, msg)
+  await logger.write(entry)
+  console.log(`Logged: ${msg}`)
+}
 
 import { readAddress, readMetaAddress, writeMetaAddress } from './utils'
 import { Dest, MuxSession, NameProtocols } from './types'
@@ -14,7 +30,7 @@ const UUID = validate(process.env.UUID ?? '')
 
 const WSPATH = process.env.WSPATH ?? ''
 
-console.log(' Server start with PORT:' + PORT + ' ' + UUID + ' ' + WSPATH)
+log(' Server start with PORT:' + PORT + ' ' + UUID + ' ' + WSPATH)
 
 let idHelper = 1
 
@@ -84,11 +100,11 @@ wss.on('error', (e: any) => {
 })
 
 wss.on('listening', () => {
-  console.log(`listening on ${PORT},uuid:${UUID},path:${WSPATH}`)
-  console.log(
+  log(`listening on ${PORT},uuid:${UUID},path:${WSPATH}`)
+  log(
     `vless://${UUID}@127.0.0.1:${PORT}?host=localhost&path=${WSPATH}&type=ws&encryption=none&fp=random&sni=localhost#nvless`
   )
-  console.log('注意修改ip 域名 ')
+  log('注意修改ip 域名 ')
 })
 
 // 仅在发送的时候才用到的buffer
