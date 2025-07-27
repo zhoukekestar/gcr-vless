@@ -34,4 +34,4 @@ cat << EOF > /home/v2ray.json
 EOF
 
 # Run V2Ray
-/home/v2ray -config /home/v2ray.json
+/home/v2ray run -config /home/v2ray.json
