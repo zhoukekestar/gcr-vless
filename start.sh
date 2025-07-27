@@ -12,7 +12,7 @@ cat << EOF > /home/v2ray.json
             "settings": {
                 "clients": [
                     {
-                        "id": "$ID", 
+                        "id": "$UUID", 
                         "flow": "",
                         "level": 0,
                         "email": "test@example.org"
