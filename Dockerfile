@@ -9,7 +9,7 @@ RUN rm -rf ./v2ray.zip
 ADD start.sh start.sh
 RUN chmod +x ./start.sh
 
-CMD start.sh
+CMD /home/start.sh
 # RUN apk add --no-cache --virtual .build-deps ca-certificates curl unzip
 # ADD configure.sh /configure.sh
 # RUN chmod +x /configure.sh
