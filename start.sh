@@ -1,6 +1,7 @@
 #!/bin/sh
 
 cd /home
+
 echo "RUN v2ray $PORT with $UUID"
 
 cat << EOF > /home/v2ray.json
