@@ -8,3 +8,7 @@ Super easy way to deploy v2ray's vless with pay-as-you-go feature which means yo
 > Don't forget your env with `UUID`
 > 
 > 记得设置 UUID 环境变量
+
+# others
+
+* Other PAAS like fly.io can be a good option too.
