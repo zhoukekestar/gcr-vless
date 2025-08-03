@@ -5,9 +5,9 @@ Super easy way to deploy v2ray's vless with pay-as-you-go feature which means yo
 
 最简单的方式部署 v2ray vless，用按量付费的方式，来尽可能省钱。
 
-> Don't forget your env with `UUID`
+> Don't forget your env with `UUID` and `PORT`
 > 
-> 记得设置 UUID 环境变量
+> 记得设置 UUID 环境变量和 PORT
 
 
 # others
@@ -16,3 +16,14 @@ Super easy way to deploy v2ray's vless with pay-as-you-go feature which means yo
   * 其他 PAAS 平台（fly.io）也是一个不错的选择
 * The memory can be as low as `256MB`
   * 内存可以低至 256MB
+
+### Azure
+
+```
+$ docker build --tag v2ray .
+$ brew install azure-cli
+$ az login
+$ az acr login --name vless
+// vless is your azure container registry's name
+$ docker push vless.azurecr.io/zkk/v2ray
+```
